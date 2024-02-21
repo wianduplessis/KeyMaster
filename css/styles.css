@@ -1,0 +1,29 @@
+*{
+    font-family: monospace;
+}
+
+body{
+    margin: 0;
+}
+
+header{
+    font-size: 30px;
+    padding-top: 40px;
+    text-align: center;
+    color :white;
+}
+
+.background{
+    background-image: url(../images/bridge.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+}
+
+.button1{
+    padding: 40px;
+    color: transparent;
+}
