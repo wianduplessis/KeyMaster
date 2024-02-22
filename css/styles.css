@@ -1,20 +1,14 @@
 *{
+    margin: 0;
     font-family: monospace;
 }
 
 body{
-    margin: 0;
-}
-
-header{
-    font-size: 30px;
-    padding-top: 40px;
-    text-align: center;
-    color :white;
+    height: 100%
 }
 
 .background{
-    background-image: url(../images/bridge.jpg);
+    background-image: url(../images/cyberpunk.gif);
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -23,7 +17,25 @@ header{
     height: 100vh;
 }
 
-.button1{
-    padding: 40px;
-    color: transparent;
+footer{
+    background-color:transparent;
+    position: relative;
+    color:white;
+    font-size: large;
+    height: 44px;
+    margin-top: -44px;
+    clear:both;
+    text-align: center;
+}
+
+.mybuttons{
+    background-color: transparent;
+    color: white;
+    border: 0;
+    font-size: large;
+}
+
+.mybuttons:hover{
+    cursor: pointer;
+    text-decoration: underline;
 }
