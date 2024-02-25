@@ -93,3 +93,11 @@ header{
     font-size: 28px;
     font-weight: bold;
 }
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
