@@ -5,10 +5,16 @@ const words = [
     'or', 'an', 'will', 'my', 'one', 'all', 'would', 'there', 'their', 'what',
     'so', 'up', 'out', 'if', 'about', 'who', 'get', 'which', 'go', 'me'
   ];
+  
+const paragraphSection = document.getElementById('paragraph');
+let userInput = document.getElementById('textbox');
 
-  const paragraphSize = 10;
+const paragraphSize = 50;
+let counter = 0;
+let initialTime;
+let seconds;
+let hasStarted = 0;
 
-// Create a random paragraph of words by selecting random words from array
 function createParagraph(){
     
     let paragraph = "";
@@ -22,17 +28,11 @@ function createParagraph(){
     return paragraph;
 }
 
-const paragraphSection = document.getElementById('paragraph');
-let userInput = document.getElementById('textbox');
-let counter = 0;
-
-
 async function renderParagraph(){
-
-    let spanId = 0;
 
     const paragraph = await createParagraph();
     paragraphSection.innerHTML = "";
+    let spanId = 0;
 
     paragraph.split(" ").forEach(word => {
 
@@ -46,33 +46,42 @@ async function renderParagraph(){
 
     counter = 0;
     userInput.value = null;
+    hasStarted = 0;
 }
-
 
 userInput.addEventListener("keydown", e => {
   
     wordArray = paragraphSection.querySelectorAll('span');
 
+    if(e.key && hasStarted === 0){
+        startTimer();
+        hasStarted++;
+    }
+
     if(e.key === ' ' || e.code == "Space"){
 
-        if(userInput.value === wordArray[paragraphSize-1].innerText){
-            e.preventDefault()
-            console.log("DONE");
+        if(userInput.value === wordArray[paragraphSize-1].innerText && counter === paragraphSize -1){
+            e.preventDefault();
+            seconds = getTime();
+            console.log(seconds);
             renderParagraph();
         }
 
         if(userInput.value + " " === wordArray[counter].innerText){
             e.preventDefault();
-            console.log("ree");
             userInput.value = null;
             paragraphSection.querySelector("#span" + counter).classList = "correct";
             counter++;
-
-            
         }
     }
 })
 
+function startTimer() {
+    initialTime = new Date();
+}
 
+function getTime() {
+    return Math.floor((new Date() - initialTime) / 1000);
+}
 
 renderParagraph();
