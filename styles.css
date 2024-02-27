@@ -6,7 +6,7 @@
 }
 
 body{
-    background-image: url(images/kl_9.jpg);
+    background-image: url(images/teal.png);
     background-size: cover;
     justify-content: center;
     flex-direction: column;
@@ -52,7 +52,7 @@ header{
 
 
 .container{
-    background-color: #2f343f;
+    background-color: #333333;
     padding: 1rem;
     border-radius: .5rem;
     width: 600px;
@@ -67,7 +67,7 @@ header{
 }
 
 .textbox{
-    background-color: #3c4251;
+    background-color: #1a1a1a;
     border-radius: .5rem;
     outline: none;
     border: none;
@@ -96,4 +96,24 @@ header{
 
 .correct {
     color: rgb(108, 220, 108);
+}
+
+.next {
+    color: rgb(237, 228, 115)
+}
+
+.wordDisplay{
+    width: 600px;
+    text-align: left;
+    padding:1rem;
+    font-family: monospace;
+    font-size: large;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.reset:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }
