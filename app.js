@@ -14,20 +14,19 @@ const words = [
     "door", "main"
   ];
   
-// Get elements from index.html by id
+// Get elements from index.html
 const paragraphSection = document.getElementById('paragraph');
-let userInput = document.getElementById('textbox');
+const userInput = document.getElementById('textbox');
 const counterSection = document.getElementById('counter');
-let resetInput = document.getElementById('reset');
+const resetInput = document.getElementById('reset');
 
+// Initialize dynamic variables
 const paragraphSize = 30;
-
 let hasStarted = false;
 let initialTime;
-
 let counter = 0;
 
-// Generate a random paragraph of words from the array 'words'
+// Generate a random paragraph of words
 function createParagraph(){
     
     let paragraph = "";
@@ -42,8 +41,7 @@ function createParagraph(){
     return paragraph;
 }
 
-// Get paragraph and display the paragraph by creating a span for each word. The spans can be identified later on
-// Reset all values and clear the textbox.
+// Display paragraph and reset 
 async function renderParagraph(){
 
     const paragraph = createParagraph();
@@ -66,15 +64,12 @@ async function renderParagraph(){
     paragraphSection.querySelector('#span0').classList = "next";
 }
 
-// Check for keypresses from the user
-// If first key pressed, start the timer which will be used for calculating wpm
-// If space is entered, compare input field to the required word
-// If true, change word color to green and next word to yellow
-// If last word, display wpm and create new paragraph
+// Check keypress from the user
 userInput.addEventListener("keydown", e => {
   
     wordArray = paragraphSection.querySelectorAll('span');
 
+    // Start timer
     if(e.key && !hasStarted ){
         startTimer();
         hasStarted = true;
@@ -84,12 +79,16 @@ userInput.addEventListener("keydown", e => {
 
         e.preventDefault();
 
+        // End and display wpm
         if(userInput.value === wordArray[paragraphSize-1].innerText && counter === paragraphSize - 1){
             counterSection.innerText ="WPM: " + Math.floor(paragraphSize/getTime()*60);
             renderParagraph();
         }
 
+        // Display word as correct and continue
         if(userInput.value + " " === wordArray[counter].innerHTML){
+
+            userInput.value = " ";
             userInput.value = null;
             paragraphSection.querySelector("#span" + counter).classList = "correct";
             counter++;
@@ -103,13 +102,15 @@ function startTimer() {
     initialTime = new Date();
 }
 
-// Get final time
+// Get time
 function getTime() {
     return Math.floor((new Date() - initialTime) / 1000);
 }
 
+// Reset
 resetInput.addEventListener('click', e => {
     renderParagraph();
 });
 
+// Render initial paragraph
 renderParagraph();
