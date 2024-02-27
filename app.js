@@ -87,8 +87,6 @@ userInput.addEventListener("keydown", e => {
 
         // Display word as correct and continue
         if(userInput.value + " " === wordArray[counter].innerHTML){
-
-            userInput.value = " ";
             userInput.value = null;
             paragraphSection.querySelector("#span" + counter).classList = "correct";
             counter++;
