@@ -50,7 +50,7 @@ async function renderParagraph(){
         const wordSpan = document.createElement('span');
         wordSpan.id = "span" + spanId;
         spanId++;
-        wordSpan.innerText= word + " ";
+        wordSpan.innerText= word + `  `;
         paragraphSection.appendChild(wordSpan)
 
     });;
