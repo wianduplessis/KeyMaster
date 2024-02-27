@@ -111,6 +111,7 @@ header{
     justify-content: space-between;
     display: flex;
     align-items: center;
+    max-width: 90%;
 }
 
 .reset:hover{
