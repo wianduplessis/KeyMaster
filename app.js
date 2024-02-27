@@ -14,23 +14,26 @@ const words = [
     "door", "main"
   ];
   
+// Get elements from index.html by id
 const paragraphSection = document.getElementById('paragraph');
 let userInput = document.getElementById('textbox');
 const counterSection = document.getElementById('counter');
 let resetInput = document.getElementById('reset');
 
 const paragraphSize = 30;
+
 let hasStarted = false;
 let initialTime;
 
 let counter = 0;
-let currentWord = 0;
 
+// Generate a random paragraph of words from the array 'words'
 function createParagraph(){
     
     let paragraph = "";
 
-    for(let i = 0; i < paragraphSize; i++ ){
+    for(let i=0; i < paragraphSize; i++){
+
         paragraph += words[Math.floor(Math.random()*words.length)];
 
         if(i !== paragraphSize - 1)
@@ -39,63 +42,68 @@ function createParagraph(){
     return paragraph;
 }
 
+// Get paragraph and display the paragraph by creating a span for each word. The spans can be identified later on
+// Reset all values and clear the textbox.
 async function renderParagraph(){
 
-    const paragraph = await createParagraph();
+    const paragraph = createParagraph();
     paragraphSection.innerHTML = "";
-    let spanId = 0;
 
     paragraph.split(" ").forEach(word => {
 
         const wordSpan = document.createElement('span');
-        wordSpan.id = "span" + spanId;
-        spanId++;
+        wordSpan.id = "span" + counter;
         wordSpan.innerText= word + " ";
         paragraphSection.appendChild(wordSpan);
+        counter++;
 
     });;
 
-    counter = 0;
     userInput.value = null;
     hasStarted = false;
-    currentWord = 0;
+    counter = 0;
 
-    paragraphSection.querySelector('#span' + currentWord).classList = "next";
+    paragraphSection.querySelector('#span0').classList = "next";
 }
 
+// Check for keypresses from the user
+// If first key pressed, start the timer which will be used for calculating wpm
+// If space is entered, compare input field to the required word
+// If true, change word color to green and next word to yellow
+// If last word, display wpm and create new paragraph
 userInput.addEventListener("keydown", e => {
   
     wordArray = paragraphSection.querySelectorAll('span');
 
     if(e.key && !hasStarted ){
         startTimer();
-        hasStarted = true;;
+        hasStarted = true;
     }
 
     if(e.key === ' ' || e.code == "Space"){
 
+        e.preventDefault();
+
         if(userInput.value === wordArray[paragraphSize-1].innerText && counter === paragraphSize - 1){
-            e.preventDefault();
             counterSection.innerText ="WPM: " + Math.floor(paragraphSize/getTime()*60);
             renderParagraph();
         }
 
-        if(userInput.value + " " === wordArray[counter].innerText || userInput.value + " " === wordArray[counter].innerHTML){
-            e.preventDefault();
+        if(userInput.value + " " === wordArray[counter].innerHTML){
             userInput.value = null;
-
             paragraphSection.querySelector("#span" + counter).classList = "correct";
-            currentWord++;
-            paragraphSection.querySelector('#span' + currentWord).classList = "next";
             counter++;
+            paragraphSection.querySelector('#span' + counter).classList = "next";
         }
     }
 })
 
+// Get initial time when the test starts
 function startTimer() {
     initialTime = new Date();
 }
 
+// Get final time
 function getTime() {
     return Math.floor((new Date() - initialTime) / 1000);
 }
