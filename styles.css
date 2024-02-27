@@ -53,6 +53,7 @@ header{
 
 .container{
     background-color: #333333;
+    position: absolute;
     padding: 1rem;
     border-radius: .5rem;
     width: 600px;
@@ -103,15 +104,14 @@ header{
 }
 
 .wordDisplay{
-    width: 600px;
-    text-align: left;
+    text-align: center;
     padding:1rem;
     font-family: monospace;
     font-size: large;
     justify-content: space-between;
     display: flex;
     align-items: center;
-    max-width: 90%;
+    max-width: 100%;
 }
 
 .reset:hover{
