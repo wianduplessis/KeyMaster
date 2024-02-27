@@ -20,11 +20,11 @@ const counterSection = document.getElementById('counter');
 let resetInput = document.getElementById('reset');
 
 const paragraphSize = 30;
-let counter = 0;
 let hasStarted = false;
-let currentWord = 0;
 let initialTime;
-let seconds;
+
+let counter = 0;
+let currentWord = 0;
 
 function createParagraph(){
     
@@ -50,8 +50,8 @@ async function renderParagraph(){
         const wordSpan = document.createElement('span');
         wordSpan.id = "span" + spanId;
         spanId++;
-        wordSpan.innerText= word + ' ';
-        paragraphSection.appendChild(wordSpan)
+        wordSpan.innerText= word + " ";
+        paragraphSection.appendChild(wordSpan);
 
     });;
 
@@ -59,6 +59,7 @@ async function renderParagraph(){
     userInput.value = null;
     hasStarted = false;
     currentWord = 0;
+
     paragraphSection.querySelector('#span' + currentWord).classList = "next";
 }
 
@@ -73,15 +74,16 @@ userInput.addEventListener("keydown", e => {
 
     if(e.key === ' ' || e.code == "Space"){
 
-        if(userInput.value === wordArray[paragraphSize-1].innerText && counter === paragraphSize -1){
+        if(userInput.value === wordArray[paragraphSize-1].innerText && counter === paragraphSize - 1){
             e.preventDefault();
             counterSection.innerText ="WPM: " + Math.floor(paragraphSize/getTime()*60);
             renderParagraph();
         }
 
-        if(userInput.value + " " === wordArray[counter].innerText || userInput.value === wordArray[counter].innerText - " "){
+        if(userInput.value + " " === wordArray[counter].innerText || userInput.value + '\n' === wordArray[counter].innerText){
             e.preventDefault();
             userInput.value = null;
+
             paragraphSection.querySelector("#span" + counter).classList = "correct";
             currentWord++;
             paragraphSection.querySelector('#span' + currentWord).classList = "next";
