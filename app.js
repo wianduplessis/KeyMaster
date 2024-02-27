@@ -19,7 +19,7 @@ let userInput = document.getElementById('textbox');
 const counterSection = document.getElementById('counter');
 let resetInput = document.getElementById('reset');
 
-const paragraphSize = 50;
+const paragraphSize = 30;
 let counter = 0;
 let hasStarted = false;
 let currentWord = 0;
@@ -50,7 +50,7 @@ async function renderParagraph(){
         const wordSpan = document.createElement('span');
         wordSpan.id = "span" + spanId;
         spanId++;
-        wordSpan.innerText= word + `  `;
+        wordSpan.innerText= word + ' ';
         paragraphSection.appendChild(wordSpan)
 
     });;
@@ -79,7 +79,7 @@ userInput.addEventListener("keydown", e => {
             renderParagraph();
         }
 
-        if(userInput.value + " " === wordArray[counter].innerText){
+        if(userInput.value + " " === wordArray[counter].innerText || userInput.value === wordArray[counter].innerText){
             e.preventDefault();
             userInput.value = null;
             paragraphSection.querySelector("#span" + counter).classList = "correct";
