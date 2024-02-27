@@ -79,7 +79,7 @@ userInput.addEventListener("keydown", e => {
             renderParagraph();
         }
 
-        if(userInput.value + " " === wordArray[counter].innerText || userInput.value === wordArray[counter].innerText){
+        if(userInput.value + " " === wordArray[counter].innerText || userInput.value === wordArray[counter].innerText - " "){
             e.preventDefault();
             userInput.value = null;
             paragraphSection.querySelector("#span" + counter).classList = "correct";
