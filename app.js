@@ -80,7 +80,7 @@ userInput.addEventListener("keydown", e => {
             renderParagraph();
         }
 
-        if(userInput.value + " " === wordArray[counter].innerText || userInput.value === wordArray[counter].innerHTML){
+        if(userInput.value + " " === wordArray[counter].innerText || userInput.value + " " === wordArray[counter].innerHTML){
             e.preventDefault();
             userInput.value = null;
 
