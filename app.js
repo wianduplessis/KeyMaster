@@ -26,6 +26,7 @@ const paragraphSize = 30;
 let hasStarted = false;
 let initialTime;
 let counter = 0;
+let incorrectWords = 0;
 
 // Generate a random paragraph of words
 function createParagraph(){
@@ -62,13 +63,14 @@ async function renderParagraph(){
     userInput.value = null;
     hasStarted = false;
     counter = 0;
+    incorrectWords = 0;
 
     paragraphSection.querySelector('#span0').classList = "next";
 }
 
 // Check keypress from the user
-userInput.addEventListener("keypress", e => {
-  
+userInput.addEventListener("keydown", e => {
+
     wordArray = paragraphSection.querySelectorAll('span');
 
     // Start timer
@@ -77,14 +79,24 @@ userInput.addEventListener("keypress", e => {
         hasStarted = true;
     }
 
-    if(e.key === ' ' || e.code == "Space"){
 
+    if(e.key === ' ' || e.code == "Space"){
+        
         e.preventDefault();
         
         // End and display wpm
-        if(userInput.value === wordArray[paragraphSize-1].innerText && counter === paragraphSize - 1){
+        if(counter === paragraphSize-1){
+            if(userInput.value !== wordArray[paragraphSize-1].innerText){
+                incorrectWords++;
+                paragraphSection.querySelector("#span" + counter).classList = "incorrect";
+            }
+            else{
+                paragraphSection.querySelector("#span" + counter).classList = "correct";
+            }
+            
             counterSection.innerText ="WPM: " + Math.floor(paragraphSize/getTime()*60);
-            renderParagraph();
+            counterSection.innerText += " / ACC: " + Math.floor(((paragraphSize-incorrectWords)/paragraphSize)*100);
+            counter++;
         }
 
         userInput.value += e.key;
@@ -97,7 +109,16 @@ userInput.addEventListener("keypress", e => {
             paragraphSection.querySelector('#span' + counter).classList = "next";
         }
 
+        // Display word as correct and continue
+        else if(userInput.value !== wordArray[counter].innerHTML){
+            userInput.value = null;
+            paragraphSection.querySelector("#span" + counter).classList = "incorrect";
+            counter++;
+            incorrectWords++;
+            paragraphSection.querySelector('#span' + counter).classList = "next";
+        }
     }
+    
 })
 
 // Get initial time when the test starts
@@ -113,6 +134,7 @@ function getTime() {
 // Reset
 resetInput.addEventListener('click', e => {
     renderParagraph();
+    counterSection.innerText = "WPM: -- / ACC: --"
 });
 
 // Render initial paragraph

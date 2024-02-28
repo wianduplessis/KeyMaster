@@ -101,6 +101,9 @@ header{
     color: rgb(108, 220, 108);
 }
 
+.incorrect{
+    color:rgb(234, 100, 100)
+}
 .next {
     color: rgb(237, 228, 115)
 }
