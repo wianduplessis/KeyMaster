@@ -13,6 +13,7 @@ body{
     align-items: center;
     min-height: 100vh;
     display: flex;
+    margin: 0;
     
 }
 
@@ -116,5 +117,6 @@ header{
 }
 
 .reset:hover{
+    text-decoration: underline;
     cursor: pointer;
 }

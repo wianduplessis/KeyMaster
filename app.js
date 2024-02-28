@@ -1,3 +1,4 @@
+
 const words = [
     "the", "more", "sentence", "between", "of", "day", "set", "city", "to", "could", 
     "three", "tree", "and", "go", "want", "cross", "a", "come", "air", "since", "in", 
@@ -46,15 +47,16 @@ async function renderParagraph(){
 
     const paragraph = createParagraph();
     paragraphSection.innerHTML = "";
+    let spanCounter = 0;
 
     paragraph.split(" ").forEach(word => {
 
         const wordSpan = document.createElement('span');
-        wordSpan.id = "span" + counter;
+        wordSpan.id = "span" + spanCounter;
         wordSpan.innerText= word + " ";
         paragraphSection.appendChild(wordSpan);
         counter++;
-
+        spanCounter++;
     });;
 
     userInput.value = null;
@@ -86,12 +88,14 @@ userInput.addEventListener("keydown", e => {
         }
 
         // Display word as correct and continue
-        if(userInput.value + " " === wordArray[counter].innerHTML){
+        if(userInput.value + e.key === wordArray[counter].innerHTML){
+            e.key;
             userInput.value = null;
             paragraphSection.querySelector("#span" + counter).classList = "correct";
             counter++;
             paragraphSection.querySelector('#span' + counter).classList = "next";
         }
+
     }
 })
 
