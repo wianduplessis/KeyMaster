@@ -80,16 +80,17 @@ userInput.addEventListener("keydown", e => {
     if(e.key === ' ' || e.code == "Space"){
 
         e.preventDefault();
-
+        
         // End and display wpm
         if(userInput.value === wordArray[paragraphSize-1].innerText && counter === paragraphSize - 1){
             counterSection.innerText ="WPM: " + Math.floor(paragraphSize/getTime()*60);
             renderParagraph();
         }
 
+        userInput.value += e.key;
+
         // Display word as correct and continue
-        if(userInput.value + e.key === wordArray[counter].innerHTML){
-            e.key;
+        if(userInput.value === wordArray[counter].innerHTML){
             userInput.value = null;
             paragraphSection.querySelector("#span" + counter).classList = "correct";
             counter++;
