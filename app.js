@@ -67,7 +67,7 @@ async function renderParagraph(){
 }
 
 // Check keypress from the user
-userInput.addEventListener("keydown", e => {
+userInput.addEventListener("keypress", e => {
   
     wordArray = paragraphSection.querySelectorAll('span');
 
