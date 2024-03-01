@@ -1,48 +1,51 @@
 *{
     box-sizing: border-box;
-    font-family:monospace;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
-    color: white;
 }
 
+/* Logo color: #bdbdbd 
+   Navbar color: #9f9f9f
+   Primary (paragraph text): #9f9f9f
+   */
+
 body{
-    background-image: url(images/space.png);
-    background-size: cover;
+    background-color: #121212;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
     display: flex;
-    margin: 0;
-    
 }
 
 header{
     justify-content: space-between;
-    background-color:transparent;
+    background-color: #121212;
     align-items: center;
-    padding: 40px 60px;
+    padding: 30px 40px;
     text-align: center;
     position: fixed;
     font-size: large;
     display: flex;
-    z-index: 100;
+    z-index: 300;
     width: 100%;
     left: 0;
     top: 0;
 }
 
 .logo{
-    font-size: 36px;
-    color: white;
+    font-size: 30px;
+    color: #bdbdbd;
     text-decoration: none;
-    font-weight: 700;
+    cursor:auto;
+    font-weight: 500;
+    user-select: none;
 }
 
 .navbar a{
     position: relative;
     font-size: 18px;
-    color: white;
+    color: #9f9f9f;
     font-weight: 500;
     margin-left: 30px;
     text-decoration: none;
@@ -50,11 +53,11 @@ header{
 
 .navbar a:hover{
     text-decoration: underline;
+    color:white;
 }
 
-
 .container{
-    background-color: #252932;
+    background-color: #1b1b1d;
     position: absolute;
     padding: 1rem;
     border-radius: .5rem;
@@ -67,10 +70,11 @@ header{
 .paragraph{
     margin-bottom: 1rem;
     padding: 10px;
+    color: #9f9f9f;
 }
 
 .textbox{
-    background-color: #2f343f;
+    background-color: #222325;
     border-radius: .5rem;
     outline: none;
     border: none;
@@ -79,47 +83,49 @@ header{
     resize: none;
     padding: 12px;
     font-size: 1em;
-    color: white;
     overflow: hidden;
+    color:white
 }
 
 .textbox:focus{
     border-color: white;
 }
 
-.githublink{
-    position: absolute;
-    background-color: transparent;
-    right:0 ;
-    top: 0;
-    padding: 1em;
-    font-size: 28px;
-    font-weight: bold;
-}
-
 .correct {
-    color: rgb(108, 220, 108);
+    color: #464646;
 }
 
 .incorrect{
-    color:rgb(234, 100, 100)
+    color: rgb(73, 34, 34);
 }
+
 .next {
-    color: rgb(237, 228, 115)
+    color: #c8c8c8;
 }
 
 .wordDisplay{
     text-align: center;
-    padding:1rem;
-    font-family: monospace;
-    font-size: large;
+    padding:1.1rem;
+    font-size: medium;
     justify-content: space-between;
     display: flex;
     align-items: center;
     max-width: 100%;
+    color: #727272;
+    z-index: 500;
 }
 
-.reset:hover{
-    text-decoration: underline;
+.resetButton{
+    padding: 10px;
+    border-radius: .5rem;
+    background-color: #222325;
+}
+
+.resetButton:hover{
+    background-color: #2e3033;;
     cursor: pointer;
+}
+
+.reset{
+    user-select: none;
 }

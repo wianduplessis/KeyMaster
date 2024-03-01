@@ -6,7 +6,7 @@ const QuoteAPI = 'http://api.quotable.io/random';
 const paragraphSection = document.getElementById('paragraph');
 const userInput = document.getElementById('textbox');
 const counterSection = document.getElementById('counter');
-const resetInput = document.getElementById('reset');
+const resetInput = document.getElementById('resetButton');
 
 // Initialize dynamic variables
 let paragraphSize;
@@ -17,6 +17,7 @@ let counter;
 let incorrectWords = 0;
 let wordArray;
 
+// return Quote from API
 function getQuote(){
     return fetch(QuoteAPI)
     .then(response => response.json())
@@ -38,16 +39,13 @@ async function renderParagraph(){
 
     resetVariables();
 
-    
-
     paragraphSection.querySelector('#span0').classList = "next";
     wordArray = paragraphSection.querySelectorAll('span');
     paragraphSize= wordArray.length;
-    console.log(paragraphSize);
     counterSection.innerText = "WPM: -- / ACC: --";
 }
 
-// Check keypress from the user
+// Check keypress from the user and handle words accordingly
 userInput.addEventListener("keydown", e => {
 
     if(e.key && !hasStarted ){
@@ -68,6 +66,7 @@ userInput.addEventListener("keydown", e => {
     }
 });
 
+// Reset variables when creating a new paragraph
 function resetVariables(){
     userInput.value = null;
     hasStarted = false;
@@ -105,7 +104,7 @@ function handleRegularWord(){
     else{        
         paragraphSection.querySelector("#span" + counter).classList = "incorrect";
         counter++;
-        paragraphSection.querySelector('#span' + counter).classList = "next";
+        paragraphSection.querySelector('#span' + counter).classList= "next";
         incorrectWords++;
     }
 }
