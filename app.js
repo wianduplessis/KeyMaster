@@ -1,19 +1,6 @@
+// Random quote API
+const QuoteAPI = 'http://api.quotable.io/random';
 
-const words = [
-    "the", "more", "sentence", "between", "of", "day", "set", "city", "to", "could", 
-    "three", "tree", "and", "go", "want", "cross", "a", "come", "air", "since", "in", 
-    "did", "well", "is", "my", "also", "start", "it", "sound", "play", "might", "you", 
-    "no", "small", "story", "that", "most", "end", "saw", "he", "who", "was", "know", 
-    "water", "than", "call", "first", "people", "may", "land", "here", "must", "real", 
-    "I", "part", "ask", "take", "work", "why", "together", "hot", "get", "change", "men", 
-    "white", "but", "place", "made", "light", "kind", "off", "need", "house", "picture", 
-    "try", "us", "again", "those", "what", "live", "point", "mother", "build", "self", 
-    "earth", "father", "feet", "which", "through", "own", "page", "should", "took", 
-    "way", "great", "answer", "school", "grow", "began", "study", "idea", "turn", 
-    "before", "learn", "mountain", "north", "once", "fish", "hear", "still", "food", 
-    "base", "thought", "cut", "sure", "see", "boy", "eye", "color", "face", "tell", 
-    "door", "main"
-  ];
   
 // Get elements from index.html
 const paragraphSection = document.getElementById('paragraph');
@@ -22,108 +9,122 @@ const counterSection = document.getElementById('counter');
 const resetInput = document.getElementById('reset');
 
 // Initialize dynamic variables
-const paragraphSize = 30;
+let paragraphSize;
 let hasStarted = false;
+let hasFinished = false;
 let initialTime;
-let counter = 0;
+let counter;
 let incorrectWords = 0;
+let wordArray;
 
-// Generate a random paragraph of words
-function createParagraph(){
-    
-    let paragraph = "";
-
-    for(let i=0; i < paragraphSize; i++){
-
-        paragraph += words[Math.floor(Math.random()*words.length)];
-
-        if(i !== paragraphSize - 1)
-            paragraph += " ";
-    }
-    return paragraph;
+function getQuote(){
+    return fetch(QuoteAPI)
+    .then(response => response.json())
+    .then(data => data.content)
 }
 
 // Display paragraph and reset 
 async function renderParagraph(){
 
-    const paragraph = createParagraph();
+    let paragraph = await getQuote();
     paragraphSection.innerHTML = "";
-    let spanCounter = 0;
 
-    paragraph.split(" ").forEach(word => {
-
+    paragraph.split(" ").forEach((word,index) => {
         const wordSpan = document.createElement('span');
-        wordSpan.id = "span" + spanCounter;
+        wordSpan.id = "span" + index;
         wordSpan.innerText= word + " ";
         paragraphSection.appendChild(wordSpan);
-        counter++;
-        spanCounter++;
-    });;
+    });
 
-    userInput.value = null;
-    hasStarted = false;
-    counter = 0;
-    incorrectWords = 0;
+    resetVariables();
+
+    
 
     paragraphSection.querySelector('#span0').classList = "next";
+    wordArray = paragraphSection.querySelectorAll('span');
+    paragraphSize= wordArray.length;
+    console.log(paragraphSize);
+    counterSection.innerText = "WPM: -- / ACC: --";
 }
 
 // Check keypress from the user
 userInput.addEventListener("keydown", e => {
 
-    wordArray = paragraphSection.querySelectorAll('span');
-
-    // Start timer
     if(e.key && !hasStarted ){
         startTimer();
-        hasStarted = true;
     }
-
 
     if(e.key === ' ' || e.code == "Space"){
-        
+
         e.preventDefault();
-        
-        // End and display wpm
-        if(counter === paragraphSize-1){
-            if(userInput.value !== wordArray[paragraphSize-1].innerText){
-                incorrectWords++;
-                paragraphSection.querySelector("#span" + counter).classList = "incorrect";
-            }
-            else{
-                paragraphSection.querySelector("#span" + counter).classList = "correct";
-            }
-            
-            counterSection.innerText ="WPM: " + Math.floor(paragraphSize/getTime()*60);
-            counterSection.innerText += " / ACC: " + Math.floor(((paragraphSize-incorrectWords)/paragraphSize)*100);
-            counter++;
+        if(counter === paragraphSize-1 && !hasFinished){
+            handleLastWord();
+            updateStats();
         }
-
-        userInput.value += e.key;
-
-        // Display word as correct and continue
-        if(userInput.value === wordArray[counter].innerHTML){
-            userInput.value = null;
-            paragraphSection.querySelector("#span" + counter).classList = "correct";
-            counter++;
-            paragraphSection.querySelector('#span' + counter).classList = "next";
+        else if(userInput.value !== ""){
+            handleRegularWord();
         }
+        clearInput();
+    }
+});
 
-        // Display word as correct and continue
-        else if(userInput.value !== wordArray[counter].innerHTML){
-            userInput.value = null;
-            paragraphSection.querySelector("#span" + counter).classList = "incorrect";
-            counter++;
-            incorrectWords++;
-            paragraphSection.querySelector('#span' + counter).classList = "next";
-        }
+function resetVariables(){
+    userInput.value = null;
+    hasStarted = false;
+    counter = 0;
+    incorrectWords = 0;
+    hasFinished = false;
+}
+
+// Handle final word
+function handleLastWord() {
+    const lastWordSpan = wordArray[paragraphSize - 1];
+    const userInputValue = userInput.value.trim();
+
+     if(userInputValue !== lastWordSpan.innerText){
+        paragraphSection.querySelector("#span" + counter).classList = "incorrect";
+        incorrectWords++;
+     }
+     else{
+        paragraphSection.querySelector("#span" + counter).classList = "correct";
+     }
+
+     hasFinished = true;
+}
+
+// Handle words (Change colours accordingly)
+function handleRegularWord(){
+    // Display word as correct and continue
+    if(userInput.value === wordArray[counter].innerHTML.trim()){          
+        paragraphSection.querySelector("#span" + counter).classList = "correct";
+        counter++;
+        paragraphSection.querySelector('#span' + counter).classList = "next";
     }
     
-})
+    // Display word as incorrect and continue
+    else{        
+        paragraphSection.querySelector("#span" + counter).classList = "incorrect";
+        counter++;
+        paragraphSection.querySelector('#span' + counter).classList = "next";
+        incorrectWords++;
+    }
+}
+
+// Clear inputbox
+function clearInput(){
+    userInput.value = null;
+}
+
+// Update WPM and ACC
+function updateStats(){
+    counterSection.innerText ="WPM: " + Math.floor(paragraphSize/getTime()*60);
+    counterSection.innerText += " / ACC: " + Math.floor(((paragraphSize-incorrectWords)/paragraphSize)*100);
+}
 
 // Get initial time when the test starts
 function startTimer() {
     initialTime = new Date();
+    hasStarted = true;
 }
 
 // Get time
@@ -134,7 +135,6 @@ function getTime() {
 // Reset
 resetInput.addEventListener('click', e => {
     renderParagraph();
-    counterSection.innerText = "WPM: -- / ACC: --"
 });
 
 // Render initial paragraph
