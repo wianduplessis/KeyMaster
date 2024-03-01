@@ -1,7 +1,19 @@
-// Random quote API
-const QuoteAPI = 'http://api.quotable.io/random';
+const words = [
+    "the", "more", "sentence", "between", "of", "day", "set", "city", "to", "could", 
+    "three", "tree", "and", "go", "want", "cross", "a", "come", "air", "since", "in", 
+    "did", "well", "is", "my", "also", "start", "it", "sound", "play", "might", "you", 
+    "no", "small", "story", "that", "most", "end", "saw", "he", "who", "was", "know", 
+    "water", "than", "call", "first", "people", "may", "land", "here", "must", "real", 
+    "I", "part", "ask", "take", "work", "why", "together", "hot", "get", "change", "men", 
+    "white", "but", "place", "made", "light", "kind", "off", "need", "house", "picture", 
+    "try", "us", "again", "those", "what", "live", "point", "mother", "build", "self", 
+    "earth", "father", "feet", "which", "through", "own", "page", "should", "took", 
+    "way", "great", "answer", "school", "grow", "began", "study", "idea", "turn", 
+    "before", "learn", "mountain", "north", "once", "fish", "hear", "still", "food", 
+    "base", "thought", "cut", "sure", "see", "boy", "eye", "color", "face", "tell", 
+    "door", "main"
+  ];
 
-  
 // Get elements from index.html
 const paragraphSection = document.getElementById('paragraph');
 const userInput = document.getElementById('textbox');
@@ -9,25 +21,46 @@ const counterSection = document.getElementById('counter');
 const resetInput = document.getElementById('resetButton');
 
 // Initialize dynamic variables
-let paragraphSize;
 let hasStarted = false;
 let hasFinished = false;
 let initialTime;
 let counter;
 let incorrectWords = 0;
 let wordArray;
+let paragraphSize;
 
-// return Quote from API
-function getQuote(){
-    return fetch(QuoteAPI)
-    .then(response => response.json())
-    .then(data => data.content)
+// API does not work on github pages web hosting
+// Generate random paragraphs for demonstration
+
+// const QuoteAPI = 'http://api.quotable.io/random';
+
+// function getQuote(){
+//     return fetch(QuoteAPI)
+//     .then(response => response.json())
+//     .then(data => data.content)
+// }
+
+
+function createParagraph(){
+    
+    let paragraph = "";
+
+    paragraphSize = Math.floor(Math.random()* (25 - 10 + 1)) + 10;
+
+    for(let i = 0; i < paragraphSize; i++ ){
+        paragraph += words[Math.floor(Math.random()*words.length)];
+
+        if(i !== paragraphSize - 1)
+            paragraph += " ";
+    }
+    console.log(paragraph)
+    return paragraph;
 }
 
 // Display paragraph and reset 
 async function renderParagraph(){
 
-    let paragraph = await getQuote();
+    let paragraph = await createParagraph();
     paragraphSection.innerHTML = "";
 
     paragraph.split(" ").forEach((word,index) => {
@@ -41,7 +74,6 @@ async function renderParagraph(){
 
     paragraphSection.querySelector('#span0').classList = "next";
     wordArray = paragraphSection.querySelectorAll('span');
-    paragraphSize= wordArray.length;
     counterSection.innerText = "WPM: -- / ACC: --";
 }
 
