@@ -1,5 +1,6 @@
 # Typer
  
-Typer is a typing test website. Created using JavaScript, HTML, CSS.
+Typer is a typing test website that is still in development. Created using JavaScript, HTML, CSS.
 
-![typer](https://github.com/wianduplessis/typer/assets/160717137/2a123885-29f7-43ef-b9b8-f0fc5c1087ce)
+![image](https://github.com/wianduplessis/typer/assets/160717137/6dcb8d0c-0b1a-49e9-9f6d-b19844ce6959)
+
