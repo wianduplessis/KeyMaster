@@ -84,10 +84,10 @@ userInput.addEventListener("keydown", e => {
         startTimer();
     }
 
-    if(e.key === ' ' || e.code == "Space"){
+    if((e.key === ' ' || e.code == "Space") && !hasFinished){
 
         e.preventDefault();
-        if(counter === paragraphSize-1 && !hasFinished){
+        if(counter === paragraphSize-1){
             handleLastWord();
             updateStats();
         }
