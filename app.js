@@ -74,7 +74,7 @@ async function renderParagraph(){
 
     paragraphSection.querySelector('#span0').classList = "next";
     wordArray = paragraphSection.querySelectorAll('span');
-    counterSection.innerText = "WPM: -- / ACC: --";
+    // counterSection.innerText = "WPM: -- / ACC: --";
 }
 
 // Check keypress from the user and handle words accordingly

@@ -5,7 +5,7 @@
 }
 
 body{
-    background-color: #121212;
+    background-color: #252932;
     justify-content: center;
     flex-direction: column;
     align-items: center;
@@ -31,7 +31,7 @@ header{
 
 .logo{
     font-size: 30px;
-    color: #bdbdbd;
+    color: white;
     text-decoration: none;
     cursor:auto;
     font-weight: 500;
@@ -41,7 +41,7 @@ header{
 .navbar a{
     position: relative;
     font-size: 18px;
-    color: #9f9f9f;
+    color: white;
     font-weight: 500;
     margin-left: 30px;
     text-decoration: none;
@@ -55,7 +55,7 @@ header{
 }
 
 .container{
-    background-color: #1b1b1d;
+    background-color: #2f343f;
     position: relative;
     padding: 1rem;
     border-radius: .5rem;
@@ -70,11 +70,11 @@ header{
 .paragraph{
     margin-bottom: 1rem;
     padding: 12px;
-    color: #9f9f9f;
+    color: white;
 }
 
 .textbox{
-    background-color: #222325;
+    background-color: #3c4251;
     border-radius: .5rem;
     outline: none;
     border: none;
@@ -92,37 +92,37 @@ header{
 }
 
 .correct {
-    color: #464646;
+    color: #9aad87;
 }
 
 .incorrect{
-    color: rgb(73, 34, 34);
+    color: #aa534f;
 }
 
 .next {
-    color: #c8c8c8;
+    color: #ab8eaa;
 }
 
 .wordDisplay{
     text-align: center;
     padding:12px;
-    font-size: medium;
+    font-size: large;
     justify-content: space-between;
     display: flex;
     align-items: center;
     max-width: 100%;
-    color: #727272;
+    color: white;
     z-index: 500;
 }
 
 .resetButton{
     padding: 12px;
     border-radius: .5rem;
-    background-color: #222325;
+    background-color: #3c4251;
 }
 
 .resetButton:hover{
-    background-color: #2e3033;;
+    background-color: #4b5265;
     cursor: pointer;
 }
 
