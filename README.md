@@ -1,7 +1,12 @@
-# typer
- 
-typer is a typing test website that is still in development. My first attempt at creating a website using JavaScript, HTML, CSS.
-Available at https://wianduplessis.github.io/typer
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-![Screenshot 2024-03-19 214830](https://github.com/wianduplessis/typer/assets/160717137/1bca3f73-e246-4003-92f8-639fd6db957a)
+![Screenshot 2024-04-27 155329](https://github.com/wianduplessis/PandaKeys/assets/160717137/09b7fbb8-082f-4368-9cc6-8ba9177da2c4)
 
+PandaKeys is a typing test website that allows the user to test their typing speed and accuracy. PandaKeys is my first attempt at web development and is created using HTML, CSS, JavaScript
+
+<!-- GETTING STARTED -->
+## How to use
+
+Simply go to the following url
+https://wianduplessis.github.io/PandaKeys/
