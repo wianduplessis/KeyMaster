@@ -1,7 +1,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Screenshot 2024-04-27 155329](https://github.com/wianduplessis/PandaKeys/assets/160717137/09b7fbb8-082f-4368-9cc6-8ba9177da2c4)
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/ce9aca2b-e72d-456b-8b97-29fb4c4f9d76">
+
 
 KeyMaster is a typing test website that allows the user to test their typing speed and accuracy. KeyMaster is my first attempt at web development and is created using HTML, CSS, JavaScript
 
@@ -9,4 +10,4 @@ KeyMaster is a typing test website that allows the user to test their typing spe
 ## How to use
 
 Simply go to the following url
-https://wianduplessis.github.io/PandaKeys/
+https://wianduplessis.github.io/KeyMaster/
